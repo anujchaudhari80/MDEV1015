@@ -6,7 +6,7 @@ import Login from './Login';
 import Navigation from './Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons } from 'react-native-vector-icons'; // Adjust the import
-import { createNativeStackNavigator } from 'react-navigation-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Flex from './Home';
 import CartScreen from './Cart';
 import ProfileScreen from './Profile';
@@ -19,7 +19,7 @@ import GymWearResult from './GymWearResult';
 import ShoesResult from './ShoesResult';
 import TrousersResult from './TrousersResult';
 import ShirtsResult from './ShirtsResult';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 

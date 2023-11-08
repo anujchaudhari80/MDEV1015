@@ -1,19 +1,20 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from './Icon'; // Make sure to import your Icon component correctly
+import Icons from './components/Icon'; // Make sure to import your Icon component correctly
 import OrderHistoryScreen from './OrderHistory';
 import CartScreen from './Cart';
 import ProfileScreen from './Profile';
 import Flex from './Home';
+import Icon from './components/Icon';
 
 const Tab = createBottomTabNavigator();
 
-const TabItem = {
-  route: string,
-  label: string,
-  type: keyof typeof Icons,
-  activeIcon: string,
-  inActiveIcon: string,
+type TabItem = {
+  route: string;
+  label: string;
+  type: keyof typeof Icons;
+  activeIcon: string;
+  inActiveIcon: string;
   component: React.ComponentType<any>;
 };
 
