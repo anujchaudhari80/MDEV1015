@@ -177,7 +177,7 @@ const GymWearResult = ({navigation}) => {
 
                 <View style = {styles.productContainer}>
                     <View style = {styles.imageContainer}>
-                        <Image source={require('./assets/GymWear5.jpeg')} style = {styles.resultImage} />
+                        <Image source={require('./assets/GymWear6.webp')} style = {styles.resultImage} />
                     </View>
                     <View style = {styles.descriptionContainer}>
                         <Text style = {styles.productName}>Light Blue Co-ords</Text>
