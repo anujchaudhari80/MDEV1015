@@ -56,7 +56,6 @@ interface IconProps {
 const Icon: React.FC<IconProps> = ({ type, name, color, size = 24, style }) => {
   const fontSize = 24;
   const Tag = Icons[type];
-  console.log(type);
   return (
     <>
       {type && name && (

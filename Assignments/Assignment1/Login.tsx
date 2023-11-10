@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { loginInAsync } from './services/api.service';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  
-  const mockCredentials = [
-    { email: 'Abc@gmail.com', password: 'Abc123' },
-    { email: 'jane.smith@example.com', password: 'jane456' },
-    { email: 'Test@example.com', password: 'test789' },
-  ];
-
-  const handleLogin = () => {
-   
-    const matchedUser = mockCredentials.find(
-      (cred) => cred.email === email && cred.password === password
-    );
-
-    if (matchedUser) {
-      
-      navigation.reset({ index : 0, routes : [{name : 'OneStopShop'}]}); 
-    } else {
-      
-      alert('Invalid email or password. Please try again.');
+  async function handleLogin() {
+    //Email and password validation
+    if (email.length <= 0 || password.length <= 0) {
+      Alert.alert('Please enter email id and password');
+      return;
     }
-  };
+    else {
+      //call the login function
+      loginInAsync(email, password)
+      .then(userCredentials => {
+        console.log("Successfully Logged In: ", userCredentials.user.uid);
+        navigation.reset({ index : 0, routes : [{name : 'OneStopShop'}]}); 
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      }
+      if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+      }
+      console.log(error);
+      Alert.alert("Incorrect email or password");
+    })
+  }
+};
 
   const handleSignup = () => {
     navigation.navigate('Signup');
@@ -40,18 +45,23 @@ const Login = () => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Email..."
+            placeholder="Email Id"
             placeholderTextColor="#000000"
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={setEmail}
+            value={email}
+            autoCorrect={false}
+            autoCapitalize='none'
+            keyboardType='email-address'
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#000000"
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={setPassword}
+            value={password}
           />
         </View>
         <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>

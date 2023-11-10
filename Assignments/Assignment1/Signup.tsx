@@ -1,16 +1,52 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { signUpUser } from './services/api.service';
 
-const Signup = () => {
+const Signup = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignup = () => {
+  async function handleSignup () {
+    //validate all fields
+    if(firstName.length == 0 || lastName.length == 0 || email.length == 0 || password.length == 0 || confirmPassword.length == 0){
+      Alert.alert("Please enter all the fields");
+    }
+    else if(password != confirmPassword){
+      Alert.alert("Passwords do not match");
+    }
+    else {
+    //call firebase auth method to create user
+    signUpUser(email, password)
+    .then(() => {
+      console.log("User Created");
+      Alert.alert("User account created successfully!");
+      navigation.goBack();
+    })
+    .catch((error) => {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('Email address is already in use!');
+        Alert.alert("Email address already in use");
+      }
+      else if (error.code === 'auth/invalid-email') {
+        console.log('Email address is invalid!');
+        Alert.alert('Email address is invalid');
+      }
+      else if (error.code === 'auth/weak-password'){
+        console.log('Weak Password');
+        Alert.alert('Please enter a strong password');
+      }
+      else {
+        console.log(error.message);
+        Alert.alert(`${error}`);
+      }
+    })
+    }
+
     
+
   };
 
   return (
@@ -20,42 +56,43 @@ const Signup = () => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="First Name..."
+            placeholder="First Name"
             placeholderTextColor="#000000"
-            onChangeText={(text) => setFirstName(text)}
+            onChangeText={setFirstName}
+            value={firstName}
+            autoCorrect={false}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Middle Name..."
+            placeholder="Last Name"
             placeholderTextColor="#000000"
-            onChangeText={(text) => setMiddleName(text)}
+            onChangeText={setLastName}
+            value={lastName}
+            autoCorrect={false}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Last Name..."
+            placeholder="Email Id"
             placeholderTextColor="#000000"
-            onChangeText={(text) => setLastName(text)}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.inputText}
-            placeholder="Email..."
-            placeholderTextColor="#000000"
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={setEmail}
+            value={email}
+            autoCapitalize='none'
+            autoCorrect={false}
+            keyboardType='email-address'
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#000000"
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={setPassword}
+            value={password}
           />
         </View>
         <View style={styles.inputView}>
@@ -64,7 +101,8 @@ const Signup = () => {
             style={styles.inputText}
             placeholder="Confirm Password..."
             placeholderTextColor="#000000"
-            onChangeText={(text) => setConfirmPassword(text)}
+            onChangeText={setConfirmPassword}
+            value={confirmPassword}
           />
         </View>
         <TouchableOpacity style={styles.signupBtn} onPress={handleSignup}>
