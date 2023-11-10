@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "73168026665",
+    "project_id": "crossplatformassignmentios",
+    "storage_bucket": "crossplatformassignmentios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73168026665:android:5c520976c922584f883038",
+        "android_client_info": {
+          "package_name": "com.assignment1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrYxscoeGTPzLMDaTXBp23_-h-d0yQbaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
