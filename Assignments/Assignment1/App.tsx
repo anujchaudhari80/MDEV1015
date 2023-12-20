@@ -1,8 +1,8 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import Icon from '../Assignment1/components/Icon'; // Make sure to adjust the import accordingly
-import SearchResult from './SearchResult';
-import Login from './Login';
+import SearchResult from './screens/SearchResult';
+import Login from './AuthScreen/Login';
 import Navigation from './Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons } from 'react-native-vector-icons'; // Adjust the import
@@ -11,14 +11,14 @@ import Flex from './Home';
 import CartScreen from './Cart';
 import ProfileScreen from './Profile';
 import OrderHistoryScreen from './OrderHistory';
-import Signup from './Signup';
+import Signup from './AuthScreen/Signup';
 
 const Stack = createNativeStackNavigator();
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import GymWearResult from './GymWearResult';
-import ShoesResult from './ShoesResult';
-import TrousersResult from './TrousersResult';
-import ShirtsResult from './ShirtsResult';
+import GymWearResult from './screens/GymWearResult';
+import ShoesResult from './screens/ShoesResult';
+import TrousersResult from './screens/TrousersResult';
+import ShirtsResult from './screens/ShirtsResult';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { loginInAsync } from './services/api.service';
+import { loginInAsync } from '../services/api.service';
 
 const Login = () => {
   const [email, setEmail] = useState('');

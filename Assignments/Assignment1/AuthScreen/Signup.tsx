@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { signUpUser } from './services/api.service';
+import { signUpUser } from '../services/api.service';
 
 const Signup = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
